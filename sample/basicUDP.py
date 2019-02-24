@@ -1,13 +1,10 @@
-'''
-  basicUDP.py - This is basic UDP example.
-  Created by Yasin Kaya (selengalp), September 19, 2018.
-'''
-
 from nbiot import nbiot
 import time
 
-your_ip = "xx.xx.xx.xx" # change with your ip
-your_port = "xxxx" # change with your port
+node = nbiot.NBIoT
+
+your_ip = "88.225.230.118" # change with your ip
+your_port = "11091" # change with your port
 
 node = nbiot.NBIoT()
 
@@ -35,6 +32,7 @@ node.closeConnection()
 time.sleep(0.5)
 node.startUDPService()
 time.sleep(0.5)
+
 
 node.sendDataUDP("Hello World!\r\n")
 time.sleep(0.5)

@@ -319,3 +319,26 @@ class NBIoT:
 	def turnOffUserLED(self):
 		GPIO.setup(USER_LED, GPIO.OUT)
 		GPIO.output(USER_LED, 0)
+
+	# ******************************************************************************************
+	# *** SMS Functions ************************************************************************
+	# ******************************************************************************************
+
+	# Function for sending SMS
+	def sendSMS(self, number, text):
+		self.sendATComm("AT+CMGF=1", "OK\r\n")  # text mode
+		delay(500)
+
+		self.compose = "AT+CMGS=\""
+		self.compose += str(number)
+		self.compose += "\""
+
+		self.sendATComm(self.compose, ">")
+		delay(1000)
+		self.clear_compose()
+		delay(1000)
+		self.sendATCommOnce(text)
+		self.sendATComm(self.CTRL_Z, "OK", 8)  # with 8 seconds timeout
+
+
+
